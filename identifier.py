@@ -6,8 +6,7 @@ import csv
 import re
 import string
 from pattern.text.en import lemma
-import nltk
-nltk.download('stopwords')
+from nltk.corpus import stopwords
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn import model_selection, naive_bayes, svm
 from sklearn.metrics import accuracy_score
