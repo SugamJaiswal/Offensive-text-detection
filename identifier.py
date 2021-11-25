@@ -5,6 +5,7 @@ import docx
 import csv
 import re
 import string
+import pickle
 from pattern.text.en import lemma
 from nltk.corpus import stopwords
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -167,7 +168,9 @@ def checkMessage(user_input):
         Tfidf_user = Tf_idf.transform(mes)
         NaiveModel = naive_bayes.MultinomialNB()
         NaiveModel.fit(TfidfTrainX, TrainY)
-        output.append(NaiveModel.predict(Tfidf_user))
+        pickle.dump(NaiveModel,open('model.pkl','wb'))
+        model=pickle.load(open('model.pkl','rb'))
+        output.append(model.predict(Tfidf_user))
     return inputUser, output
 
 
@@ -185,7 +188,9 @@ def checkDocument(document):
     Tfidf_user = Tf_idf.transform(resultSentence)
     NaiveModel = naive_bayes.MultinomialNB()
     NaiveModel.fit(TfidfTrainX, TrainY)
-    output.append(NaiveModel.predict(Tfidf_user))
+    pickle.dump(NaiveModel,open('model.pkl','wb'))
+    model=pickle.load(open('model.pkl','rb'))
+    output.append(model.predict(Tfidf_user))
     return resultSentence, output[0]
 
 
